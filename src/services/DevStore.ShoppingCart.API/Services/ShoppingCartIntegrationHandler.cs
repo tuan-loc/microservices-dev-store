@@ -36,12 +36,12 @@ namespace DevStore.ShoppingCart.API.Services
             using var scope = _serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<Data.ShoppingCartContext>();
 
-            var shoppingCart = await context.CustomerShoppingCart
+            var carrinho = await context.CustomerShoppingCart
                 .FirstOrDefaultAsync(c => c.CustomerId == message.CustomerId);
 
-            if (shoppingCart != null)
+            if (carrinho != null)
             {
-                context.CustomerShoppingCart.Remove(shoppingCart);
+                context.CustomerShoppingCart.Remove(carrinho);
                 await context.SaveChangesAsync();
             }
         }
